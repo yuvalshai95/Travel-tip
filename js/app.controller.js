@@ -1,11 +1,13 @@
 import { locService } from './services/loc.service.js';
 import { mapService } from './services/map.service.js';
+import { geocodeService } from './services/geocode.service.js';
 
 window.onload = onInit;
 window.onAddMarker = onAddMarker;
 window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
+window.onSearch = onSearch;
 
 function onInit() {
   mapService
@@ -41,17 +43,16 @@ function onGetLocs() {
 }
 
 function onGetUserPos() {
-  //YUVAL
-  //TODO: After we get position(promise was ok)
-  //call mapService.panTo(Lat,Lng) with user position
   // TODO: add searched location to gLoc ???
-  //TODO: save location to localstorage
   getPosition()
     .then(pos => {
-      console.log('User position is:', pos.coords);
-      document.querySelector(
-        '.user-pos'
-      ).innerText = `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`;
+      //   console.log('User position is:', pos.coords);
+      //   document.querySelector('.user-pos').innerText = `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`;
+
+      // Go to user location
+      mapService.panTo(pos.coords.latitude, pos.coords.longitude);
+      // Add marker on user location
+      mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude });
     })
     .catch(err => {
       console.log('err!!!', err);
@@ -60,4 +61,16 @@ function onGetUserPos() {
 function onPanTo() {
   console.log('Panning the Map');
   mapService.panTo(35.6895, 139.6917);
+}
+
+function onSearch(evt) {
+  evt.preventDefault();
+  const elSearchInput = document.querySelector('input[name=search-input]');
+  if (!elSearchInput.value) return;
+
+  geocodeService.getPosBySearch(elSearchInput.value).then(pos => {
+    console.log('pos from controller', pos);
+    mapService.panTo(pos.lat, pos.lng);
+    mapService.addMarker(pos);
+  });
 }

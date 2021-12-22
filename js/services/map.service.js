@@ -5,6 +5,8 @@ export const mapService = {
 };
 
 let gMap;
+console.log('🚀 ~ file: map.service.js ~ line 8 ~ gMap', gMap);
+
 // let gLastClickedPos
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
