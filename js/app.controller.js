@@ -9,6 +9,7 @@ window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onSearch = onSearch;
+window.onCopyUrl = onCopyUrl;
 
 const map = mapService.getMap();
 console.log('map:', map);
@@ -16,8 +17,8 @@ console.log('map:', map);
 function onInit() {
   mapService
     .initMap()
-    .then((map) => {
-      map.add
+    .then(map => {
+      map.add;
     })
     .catch(() => console.log('Error: cannot init map'));
 }
@@ -95,3 +96,13 @@ function onAddLocation(ev) {
 // function toggleModal() {
 
 // }
+
+function onCopyUrl() {
+  const pos = mapService.getLastPos();
+  console.log('🚀 ~ file: app.controller.js ~ line 103 ~ onCopyUrl ~ pos', pos);
+  //   const url = 'https://yuvalshai95.github.io/Travel-tip/index.html?';
+
+  navigator.clipboard.writeText(
+    `https://yuvalshai95.github.io/Travel-tip/index.html?lat=${pos.lat}?lng=${pos.lng}`
+  );
+}

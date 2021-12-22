@@ -1,33 +1,41 @@
-
-import { storageService } from './storage.service.js'
+import { storageService } from './storage.service.js';
 
 export const mapService = {
   initMap,
   addMarker,
   panTo,
   getMap,
+  getLastPos,
 };
 
 let gMap;
-console.log('🚀 ~ file: map.service.js ~ line 8 ~ gMap', gMap);
-
-// let gLastClickedPos
+let gLastClickedPos;
+console.log('🚀 ~ file: map.service.js ~ line 12 ~ gLastClickedPos', gLastClickedPos);
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlLat = urlParams.get('lat');
+  console.log('🚀 ~ file: map.service.js ~ line 18 ~ initMap ~ urlLat', +urlLat);
+  const urlLng = urlParams.get('lng');
+  console.log('🚀 ~ file: map.service.js ~ line 20 ~ initMap ~ urlLng', +urlLng);
+  if (urlLng && urlLat) {
+    lat = +urlLat;
+    lng = +urlLng;
+  }
   console.log('InitMap');
-  return _connectGoogleApi().then(() => {
-    console.log('google available');
-    gMap = new google.maps.Map(document.querySelector('#map'), {
-      center: { lat, lng },
-      zoom: 15,
+  return _connectGoogleApi()
+    .then(() => {
+      console.log('google available');
+      gMap = new google.maps.Map(document.querySelector('#map'), {
+        center: { lat, lng },
+        zoom: 15,
+      });
     })
-
-    console.log('Map!', gMap);
-    window.gMap = gMap;
-
-  }).then(() => gMap)
+    .then(() => {
+      gLastClickedPos = { lat, lng };
+      return gMap;
+    });
 }
-console.log('gMap:', gMap);
 // TODO: add Catch and throw error - YUVAL
 
 function addMarker(loc) {
@@ -58,7 +66,11 @@ function _connectGoogleApi() {
   });
 }
 
-
 function getMap() {
-  return gMap
+  return gMap;
+}
+
+function getLastPos() {
+  console.log('🚀 ~ file: map.service.js ~ line 65 ~ getLastPos ~ gLastClickedPos', gLastClickedPos);
+  return gLastClickedPos;
 }
