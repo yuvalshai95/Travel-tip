@@ -1,12 +1,10 @@
 import { locService } from './services/loc.service.js';
 import { mapService } from './services/map.service.js';
 import { geocodeService } from './services/geocode.service.js';
-import { weatherService } from './services/weather.service.js'
+import { weatherService } from './services/weather.service.js';
 
 // Globals - after test - Remove
 let gAddPos;
-
-
 
 window.onload = onInit;
 // window.onAddMarker = onAddMarker;
@@ -93,33 +91,25 @@ function onAddLocation(ev) {
   mapService.panTo(gAddPos);
   mapService.addMarker(gAddPos);
   document.querySelector('.modal-add-location form input').value = '';
-  _toggleModal(false)
+  _toggleModal(false);
 }
-
 
 // TODO:NEED TO SPLIT FUNCTION
 function addMapEvent(map) {
-  map.addListener('click', (mapsMouseEvent) => {
+  map.addListener('click', mapsMouseEvent => {
     _toggleModal(true);
     const pos = mapsMouseEvent.latLng.toJSON();
     gAddPos = pos;
-  })
+  });
 }
-
-
 
 function _toggleModal(isOpen) {
-  document.querySelector('.modal-add-location').style.display = (isOpen) ? 'block' : 'none';
+  document.querySelector('.modal-add-location').style.display = isOpen ? 'block' : 'none';
 }
 
-
-
 function testData() {
-  console.log('working...')
-  weatherService
-    .getWeatherByCityName('barcelona')
-    .then(console.log)
-    .catch(console.log)
+  console.log('working...');
+  weatherService.getWeatherByCityName('barcelona').then(console.log).catch(console.log);
 }
 // }
 
@@ -129,6 +119,6 @@ function onCopyUrl() {
   //   const url = 'https://yuvalshai95.github.io/Travel-tip/index.html?';
 
   navigator.clipboard.writeText(
-    `https://yuvalshai95.github.io/Travel-tip/index.html?lat=${pos.lat}?lng=${pos.lng}`
+    `https://yuvalshai95.github.io/Travel-tip/index.html?lat=${pos.lat}&lng=${pos.lng}`
   );
 }
