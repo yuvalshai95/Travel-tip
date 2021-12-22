@@ -3,9 +3,17 @@ import { mapService } from './services/map.service.js';
 
 window.onload = onInit;
 window.onAddMarker = onAddMarker;
+window.onAddLocation = onAddLocation;
 window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
+
+const map = mapService.getMap();
+console.log('map:', map);
+
+
+
+
 
 function onInit() {
   mapService
@@ -25,12 +33,15 @@ function getPosition() {
 }
 
 function onAddMarker() {
-  console.log('Adding a marker');
+  // Show-modal
+  document.querySelector('.modal-add-location').hidden = false;
+
+
   //DANIEL
   // TODO: Need to get location for marker
   //TODO: Change hard coded location to be dynamic from user clicks
   // gMap.panTo(Lat,Lng);
-  mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+  // mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
 }
 
 function onGetLocs() {
@@ -57,7 +68,32 @@ function onGetUserPos() {
       console.log('err!!!', err);
     });
 }
+
+
+
+
+
 function onPanTo() {
   console.log('Panning the Map');
-  mapService.panTo(35.6895, 139.6917);
+  mapService.panTo({ lat: 29.575788243292692, lng: 34.93490679588882 });
 }
+
+
+
+
+function onAddLocation(ev) {
+  ev.preventDefault();
+  let locationName = document.querySelector('.modal-add-location form input').value;
+  if (!locationName) return;
+  locService.addLocation(locationName);
+  mapService.panTo({ lat: 36.054523, lng: 38.1545412 })
+  mapService.addMarker({ lat: 36.054523, lng: 38.1545412 });
+  document.querySelector('.modal-add-location form input').value = '';
+}
+
+
+
+// function toggleModal() {
+
+// }
+

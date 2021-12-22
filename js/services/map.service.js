@@ -1,7 +1,11 @@
+
+import { storageService } from './storage.service.js'
+
 export const mapService = {
   initMap,
   addMarker,
   panTo,
+  // getMap,
 };
 
 let gMap;
@@ -19,6 +23,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
     window.gMap = gMap;
   }); // TODO: add Catch and throw error - YUVAL
 }
+console.log('gMap:', gMap);
 
 function addMarker(loc) {
   var marker = new google.maps.Marker({
@@ -47,3 +52,8 @@ function _connectGoogleApi() {
     elGoogleApi.onerror = () => reject('Google script failed to load');
   });
 }
+
+
+// function getMap() {
+//   return gMap
+// }
