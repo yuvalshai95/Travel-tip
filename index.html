@@ -18,6 +18,32 @@
         <input class="search-input" name="search-input" placeholder="Search Address here" type="text">
         <button>🔍</button>
     </form>
+    <button onclick="onPanTo()" class="btn-pan">Pan Map to Eilat</button>
+
+    <!-- Add-Modal -->
+    <div class="modal-add-location" hidden>
+        <!-- <div class="icons">
+            <span onclick="onEscape()" class="escape">X</span>
+            <h4>Please choose icon of location type:</h4>
+            <i data-name="work" onclick="onIcon(this)" class="fa fa-briefcase" aria-hidden="true"></i>
+            <i data-name="home" onclick="onIcon(this)" class="fa fa-home" aria-hidden="true"></i>
+            <i data-name="restaurant" onclick="onIcon(this)" class="fa fa-cutlery" aria-hidden="true"></i>
+            <i data-name="vacation" onclick="onIcon(this)" class="fas fa-umbrella-beach"></i>
+            <i data-name="sport" onclick="onIcon(this)" class="fas fa-swimmer"></i>
+        </div> -->
+        <section class="inputs">
+            <form action="">
+                <label class="name-label" for="location-name">Enter the location name:</label>
+                <input class="location-name" type="text" name="" id="location-name" autocomplete="off" required>
+                <button type="submit" onclick="onAddLocation(event)" class="btn-add">Add <span><i
+                            class="fas fa-plus"></i></span></button>
+
+            </form>
+        </section>
+
+    </div>
+
+
 
     <p>You are at: <span class="user-pos"></span></p>
     <p>Locations: <span class="locs"></span></p>
