@@ -14,9 +14,9 @@ console.log('🚀 ~ file: map.service.js ~ line 12 ~ gLastClickedPos', gLastClic
 function initMap(lat = 32.0749831, lng = 34.9120554) {
   const urlParams = new URLSearchParams(window.location.search);
   const urlLat = urlParams.get('lat');
-  console.log('🚀 ~ file: map.service.js ~ line 18 ~ initMap ~ urlLat', +urlLat);
+  console.log('🚀 ~ file: map.service.js ~ line 18 ~ initMap ~ urlLat', urlLat);
   const urlLng = urlParams.get('lng');
-  console.log('🚀 ~ file: map.service.js ~ line 20 ~ initMap ~ urlLng', +urlLng);
+  console.log('🚀 ~ file: map.service.js ~ line 20 ~ initMap ~ urlLng', urlLng);
   if (urlLng && urlLat) {
     lat = +urlLat;
     lng = +urlLng;
@@ -64,7 +64,6 @@ function _connectGoogleApi() {
     elGoogleApi.onerror = () => reject('Google script failed to load');
   });
 }
-
 
 function getLastPos() {
   console.log('🚀 ~ file: map.service.js ~ line 65 ~ getLastPos ~ gLastClickedPos', gLastClickedPos);
