@@ -79,7 +79,7 @@ function onSearch(evt) {
 
   geocodeService.getPosBySearch(elSearchInput.value).then(pos => {
     console.log('pos from controller', pos);
-    mapService.panTo(pos.lat, pos.lng);
+    mapService.panTo(pos);
     mapService.addMarker(pos);
   });
 }

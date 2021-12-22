@@ -21,6 +21,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
     lat = +urlLat;
     lng = +urlLng;
   }
+
   console.log('InitMap');
   return _connectGoogleApi()
     .then(() => {
@@ -28,10 +29,11 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
       gMap = new google.maps.Map(document.querySelector('#map'), {
         center: { lat, lng },
         zoom: 15,
-      });
+      })
     })
     .then(() => {
       gLastClickedPos = { lat, lng };
+      addMarker(gLastClickedPos)
       return gMap;
     });
 }
