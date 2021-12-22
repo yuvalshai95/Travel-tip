@@ -16,6 +16,7 @@ window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onSearch = onSearch;
 window.testData = testData;
+window.onCopyUrl = onCopyUrl;
 
 function onInit() {
   mapService
@@ -119,5 +120,15 @@ function testData() {
     .getWeatherByCityName('barcelona')
     .then(console.log)
     .catch(console.log)
+}
+// }
 
+function onCopyUrl() {
+  const pos = mapService.getLastPos();
+  console.log('🚀 ~ file: app.controller.js ~ line 103 ~ onCopyUrl ~ pos', pos);
+  //   const url = 'https://yuvalshai95.github.io/Travel-tip/index.html?';
+
+  navigator.clipboard.writeText(
+    `https://yuvalshai95.github.io/Travel-tip/index.html?lat=${pos.lat}?lng=${pos.lng}`
+  );
 }
