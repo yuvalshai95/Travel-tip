@@ -17,6 +17,7 @@ window.onGetUserPos = onGetUserPos;
 window.onSearch = onSearch;
 window.testData = testData;
 window.onCopyUrl = onCopyUrl;
+window.testData = testData;
 
 function onInit() {
   mapService
@@ -115,13 +116,14 @@ function _toggleModal(isOpen) {
 
 
 function testData() {
+
   console.log('working...')
   weatherService
-    .getWeatherByCityName('barcelona')
-    .then(console.log)
+    .getWeatherByCityName()
+    .then((res) => console.log(res))
     .catch(console.log)
 }
-// }
+
 
 function onCopyUrl() {
   const pos = mapService.getLastPos();
