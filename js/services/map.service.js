@@ -5,6 +5,7 @@ export const mapService = {
 };
 
 let gMap;
+// let gLastClickedPos
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
   console.log('InitMap');
@@ -16,7 +17,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
     });
     console.log('Map!', gMap);
     window.gMap = gMap;
-  }); // TODO: add Catch and throw error
+  }); // TODO: add Catch and throw error - YUVAL
 }
 
 function addMarker(loc) {

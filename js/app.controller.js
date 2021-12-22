@@ -26,6 +26,7 @@ function getPosition() {
 
 function onAddMarker() {
   console.log('Adding a marker');
+  //DANIEL
   // TODO: Need to get location for marker
   //TODO: Change hard coded location to be dynamic from user clicks
   // gMap.panTo(Lat,Lng);
@@ -40,8 +41,11 @@ function onGetLocs() {
 }
 
 function onGetUserPos() {
+  //YUVAL
   //TODO: After we get position(promise was ok)
   //call mapService.panTo(Lat,Lng) with user position
+  // TODO: add searched location to gLoc ???
+  //TODO: save location to localstorage
   getPosition()
     .then(pos => {
       console.log('User position is:', pos.coords);
