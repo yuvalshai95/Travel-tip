@@ -5,7 +5,7 @@ export const mapService = {
   initMap,
   addMarker,
   panTo,
-  // getMap,
+  getMap,
 };
 
 let gMap;
@@ -18,12 +18,15 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
     gMap = new google.maps.Map(document.querySelector('#map'), {
       center: { lat, lng },
       zoom: 15,
-    });
+    })
+
     console.log('Map!', gMap);
     window.gMap = gMap;
-  }); // TODO: add Catch and throw error - YUVAL
+
+  }).then(() => gMap)
 }
 console.log('gMap:', gMap);
+// TODO: add Catch and throw error - YUVAL
 
 function addMarker(loc) {
   var marker = new google.maps.Marker({
@@ -54,6 +57,6 @@ function _connectGoogleApi() {
 }
 
 
-// function getMap() {
-//   return gMap
-// }
+function getMap() {
+  return gMap
+}
