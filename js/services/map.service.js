@@ -5,13 +5,10 @@ export const mapService = {
   initMap,
   addMarker,
   panTo,
-  getMap,
 };
 
 let gMap;
-console.log('🚀 ~ file: map.service.js ~ line 8 ~ gMap', gMap);
 
-// let gLastClickedPos
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
   console.log('InitMap');
@@ -27,7 +24,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
   }).then(() => gMap)
 }
-console.log('gMap:', gMap);
 // TODO: add Catch and throw error - YUVAL
 
 function addMarker(loc) {
@@ -58,7 +54,3 @@ function _connectGoogleApi() {
   });
 }
 
-
-function getMap() {
-  return gMap
-}

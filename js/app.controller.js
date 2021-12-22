@@ -1,24 +1,26 @@
 import { locService } from './services/loc.service.js';
 import { mapService } from './services/map.service.js';
 import { geocodeService } from './services/geocode.service.js';
+import { weatherService } from './services/weather.service.js'
+
+// Globals - after test - Remove
+let gAddPos;
+
+
 
 window.onload = onInit;
-window.onAddMarker = onAddMarker;
+// window.onAddMarker = onAddMarker;
 window.onAddLocation = onAddLocation;
 window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onSearch = onSearch;
-
-const map = mapService.getMap();
-console.log('map:', map);
+window.testData = testData;
 
 function onInit() {
   mapService
     .initMap()
-    .then((map) => {
-      map.add
-    })
+    .then(addMapEvent)
     .catch(() => console.log('Error: cannot init map'));
 }
 
@@ -30,16 +32,16 @@ function getPosition() {
   });
 }
 
-function onAddMarker() {
-  // Show-modal
-  document.querySelector('.modal-add-location').hidden = false;
+// function onAddMarker() {
+//   // Show-modal
+//   document.querySelector('.modal-add-location').hidden = false;
 
-  //DANIEL
-  // TODO: Need to get location for marker
-  //TODO: Change hard coded location to be dynamic from user clicks
-  // gMap.panTo(Lat,Lng);
-  // mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
-}
+//   //DANIEL
+//   // TODO: Need to get location for marker
+//   //TODO: Change hard coded location to be dynamic from user clicks
+//   // gMap.panTo(Lat,Lng);
+//   // mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+// }
 
 function onGetLocs() {
   locService.getLocs().then(locs => {
@@ -86,12 +88,36 @@ function onAddLocation(ev) {
   ev.preventDefault();
   let locationName = document.querySelector('.modal-add-location form input').value;
   if (!locationName) return;
-  locService.addLocation(locationName);
-  mapService.panTo({ lat: 36.054523, lng: 38.1545412 });
-  mapService.addMarker({ lat: 36.054523, lng: 38.1545412 });
+  locService.addLocation(locationName, gAddPos);
+  mapService.panTo(gAddPos);
+  mapService.addMarker(gAddPos);
   document.querySelector('.modal-add-location form input').value = '';
+  _toggleModal(false)
 }
 
-// function toggleModal() {
 
-// }
+// TODO:NEED TO SPLIT FUNCTION
+function addMapEvent(map) {
+  map.addListener('click', (mapsMouseEvent) => {
+    _toggleModal(true);
+    const pos = mapsMouseEvent.latLng.toJSON();
+    gAddPos = pos;
+  })
+}
+
+
+
+function _toggleModal(isOpen) {
+  document.querySelector('.modal-add-location').style.display = (isOpen) ? 'block' : 'none';
+}
+
+
+
+function testData() {
+  console.log('working...')
+  weatherService
+    .getWeatherByCityName('barcelona')
+    .then(console.log)
+    .catch(console.log)
+
+}

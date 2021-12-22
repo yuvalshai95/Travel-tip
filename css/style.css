@@ -1,0 +1,15 @@
+.modal-add-location {
+    display: none;
+}
+
+
+.modal-add-location {
+    position: absolute;
+    bottom: 5%;
+    left: 35%;
+    height: 400px;
+    background-color: #FCF8E8;
+    opacity: 0.9;
+    width: 350px;
+    text-align: center;
+}

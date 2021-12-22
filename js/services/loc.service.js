@@ -15,7 +15,7 @@ const gLocs = [
 function getLocs() {
   //DONE: Check  localstorage for data -> CACHE
   console.log('FROM CACHE');
-  const locations = storageService.load(STORAGE_KEY);
+  const locations = storageService.load(STORAGE_KEY) || [];
   if (locations.length) return Promise.resolve(locations);
 
   console.log('FROM API');
@@ -24,6 +24,7 @@ function getLocs() {
       resolve(gLocs);
     }, 2000);
   });
+
 }
 
 
@@ -36,6 +37,7 @@ function _createLocation(name, pos,) {
     createdAt: Date.now(),
     updatedAt: null
   }
+  console.log('check');
   gLocs.unshift(newLocation);
   storageService.save(STORAGE_KEY, gLocs);
 }
