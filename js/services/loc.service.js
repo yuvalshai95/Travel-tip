@@ -1,19 +1,19 @@
 export const locService = {
-    getLocs
-}
+  getLocs,
+};
 
-
-const locs = [
-    { name: 'Greatplace', lat: 32.047104, lng: 34.832384 }, 
-    { name: 'Neveragain', lat: 32.047201, lng: 34.832581 }
-]
+const gLocs = [
+  // Get from localstorage
+  // {id, name, lat, lng, weather, createdAt, updatedAt}
+  { name: 'Greatplace', lat: 32.047104, lng: 34.832384 },
+  { name: 'Neveragain', lat: 32.047201, lng: 34.832581 },
+];
 
 function getLocs() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(locs);
-        }, 2000)
-    });
+  //TODO: Check  localstorage for data -> CACHE
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(gLocs);
+    }, 2000);
+  });
 }
-
-
