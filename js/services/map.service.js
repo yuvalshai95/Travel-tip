@@ -46,7 +46,7 @@ function addMarker(loc) {
   return marker;
 }
 
-function panTo(lat, lng) {
+function panTo({ lat, lng }) {
   var laLatLng = new google.maps.LatLng(lat, lng);
   gLastClickedPos = { lat, lng };
   gMap.panTo(laLatLng);

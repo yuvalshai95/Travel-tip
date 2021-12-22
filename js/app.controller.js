@@ -101,6 +101,8 @@ function addMapEvent(map) {
     _toggleModal(true);
     const pos = mapsMouseEvent.latLng.toJSON();
     gAddPos = pos;
+    console.log('pos-fromMapEvent:', pos);
+
   });
 }
 
