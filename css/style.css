@@ -101,8 +101,19 @@ input {
 
 .modal-add-location {
     display: none;
+    position: relative;
 }
 
+.escape {
+    position: absolute;
+    top: 5px;
+    right: 7px;
+}
+
+
+.escape i {
+    font-size: 15px;
+}
 
 .modal-add-location {
     position: absolute;

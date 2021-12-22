@@ -9,20 +9,16 @@ export const mapService = {
 
 let gMap;
 let gLastClickedPos;
-console.log('🚀 ~ file: map.service.js ~ line 12 ~ gLastClickedPos', gLastClickedPos);
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
   const urlParams = new URLSearchParams(window.location.search);
   const urlLat = urlParams.get('lat');
-  console.log('🚀 ~ file: map.service.js ~ line 18 ~ initMap ~ urlLat', urlLat);
   const urlLng = urlParams.get('lng');
-  console.log('🚀 ~ file: map.service.js ~ line 20 ~ initMap ~ urlLng', urlLng);
   if (urlLng && urlLat) {
     lat = +urlLat;
     lng = +urlLng;
   }
 
-  console.log('InitMap');
   return _connectGoogleApi()
     .then(() => {
       console.log('google available');
@@ -35,14 +31,18 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
       gLastClickedPos = { lat, lng };
       addMarker(gLastClickedPos)
       return gMap;
-    });
+    })
+    .catch((err) => {
+      console.log(err)
+      throw err
+    })
 }
 
 function addMarker(loc) {
   var marker = new google.maps.Marker({
     position: loc,
     map: gMap,
-    title: 'Hello World!',
+    title: 'location',
   });
   return marker;
 }
@@ -68,6 +68,5 @@ function _connectGoogleApi() {
 }
 
 function getLastPos() {
-  console.log('🚀 ~ file: map.service.js ~ line 65 ~ getLastPos ~ gLastClickedPos', gLastClickedPos);
   return gLastClickedPos;
 }

@@ -52,13 +52,13 @@
             <button onclick="onGetLocs()" class="btn-get-locs">Get Locations <i class="fas fa-layer-group"></i></button>
             <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo <i class="fas fa-route"></i></button>
             <button class="copy-url-btn" onclick="onCopyUrl()">Copy Link <i class="far fa-copy"></i></button>
-            <button onclick="testData()"> test me!</button>
+            <!-- <button onclick="testData()"> test me!</button> -->
         </div>
 
 
         <!-- Modal (display -> none) -->
         <div class="modal-add-location">
-
+            <span onclick="onEscape()" class="escape"><i class="far fa-times-circle"></i></span>
             <div class="inputs">
                 <form action="">
                     <label class="name-label" for="location-name">Enter the location name:</label>
