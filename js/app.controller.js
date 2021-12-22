@@ -7,7 +7,6 @@ import { weatherService } from './services/weather.service.js';
 let gAddPos;
 
 window.onload = onInit;
-// window.onAddMarker = onAddMarker;
 window.onAddLocation = onAddLocation;
 window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
@@ -20,51 +19,33 @@ window.testData = testData;
 function onInit() {
   mapService
     .initMap()
-    .then(addMapEvent)
+    .then(handleOnMap)
     .catch(() => console.log('Error: cannot init map'));
 }
 
-// This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getPosition() {
-  console.log('Getting Pos');
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 }
 
-// function onAddMarker() {
-//   // Show-modal
-//   document.querySelector('.modal-add-location').hidden = false;
-
-//   //DANIEL
-//   // TODO: Need to get location for marker
-//   //TODO: Change hard coded location to be dynamic from user clicks
-//   // gMap.panTo(Lat,Lng);
-//   // mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
-// }
-
 function onGetLocs() {
   locService.getLocs().then(locs => {
-    console.log('Locations:', locs);
     document.querySelector('.locs').innerText = JSON.stringify(locs);
   });
 }
 
 function onGetUserPos() {
-  // TODO: add searched location to gLoc ???
+
   getPosition()
     .then(pos => {
-      //   console.log('User position is:', pos.coords);
-      //   document.querySelector('.user-pos').innerText = `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`;
-
-      // Go to user location
       mapService.panTo(pos.coords.latitude, pos.coords.longitude);
-      // Add marker on user location
       mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude });
     })
     .catch(err => {
       console.log('err!!!', err);
     });
+
 }
 
 function onPanTo() {
@@ -78,7 +59,6 @@ function onSearch(evt) {
   if (!elSearchInput.value) return;
 
   geocodeService.getPosBySearch(elSearchInput.value).then(pos => {
-    console.log('pos from controller', pos);
     mapService.panTo(pos);
     mapService.addMarker(pos);
   });
@@ -95,14 +75,11 @@ function onAddLocation(ev) {
   _toggleModal(false);
 }
 
-// TODO:NEED TO SPLIT FUNCTION
-function addMapEvent(map) {
+function handleOnMap(map) {
   map.addListener('click', mapsMouseEvent => {
     _toggleModal(true);
     const pos = mapsMouseEvent.latLng.toJSON();
     gAddPos = pos;
-    console.log('pos-fromMapEvent:', pos);
-
   });
 }
 
@@ -111,7 +88,6 @@ function _toggleModal(isOpen) {
 }
 
 function testData() {
-
   console.log('working...')
   weatherService
     .getWeatherByCityName()

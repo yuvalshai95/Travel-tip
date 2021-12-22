@@ -37,7 +37,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
       return gMap;
     });
 }
-// TODO: add Catch and throw error - YUVAL
 
 function addMarker(loc) {
   var marker = new google.maps.Marker({

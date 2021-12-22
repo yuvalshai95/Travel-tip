@@ -9,55 +9,71 @@
 </head>
 
 <body>
-    <h1>TravelTip </h1>
-    <div id="map" style="width: 100%; height: 400px;"></div>
-    <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
-    <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-    <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
-    <form autocomplete="off" onsubmit="onSearch(event)">
-        <input class="search-input" name="search-input" placeholder="Search Address here" type="text">
-        <button>🔍</button>
-    </form>
-    <button onclick="onPanTo()" class="btn-pan">Pan Map to Eilat</button>
-    <button class="copy-url-btn" onclick="onCopyUrl()">Copy Link</button>
+
+    <div class="main-page grid">
+
+        <header class="main-header">
+            <h1>TravelTip <i class="fas fa-map-pin"></i></h1>
+        </header>
 
 
+        <section class="info-container grid-main-item">
 
-    <button onclick="testData()"> test me!</button>
+            <!-- SEARCH -->
+            <form autocomplete="off" onsubmit="onSearch(event)">
 
-
-
-
-
-
-
-    <!-- Add-Modal -->
-    <div class="modal-add-location">
-        <!-- <div class="icons">
-            <span onclick="onEscape()" class="escape">X</span>
-            <h4>Please choose icon of location type:</h4>
-            <i data-name="work" onclick="onIcon(this)" class="fa fa-briefcase" aria-hidden="true"></i>
-            <i data-name="home" onclick="onIcon(this)" class="fa fa-home" aria-hidden="true"></i>
-            <i data-name="restaurant" onclick="onIcon(this)" class="fa fa-cutlery" aria-hidden="true"></i>
-            <i data-name="vacation" onclick="onIcon(this)" class="fas fa-umbrella-beach"></i>
-            <i data-name="sport" onclick="onIcon(this)" class="fas fa-swimmer"></i>
-        </div> -->
-        <section class="inputs">
-            <form action="">
-                <label class="name-label" for="location-name">Enter the location name:</label>
-                <input class="location-name" type="text" name="" id="location-name" autocomplete="off" required>
-                <button type="submit" onclick="onAddLocation(event)" class="btn-add">Add <span><i
-                            class="fas fa-plus"></i></span></button>
+                <input class="search-input" name="search-input" placeholder="Search Address here" type="text">
+                <button><i class="fas fa-search"></i></button>
 
             </form>
+
+            <!-- WEATHER -->
+            <div class="weather-container grid-main-item">
+                <h4>weather today:</h4>
+            </div>
+
         </section>
 
+
+        <!-- MAP -->
+        <div class="grid-main-item" id="map" style="width: 100%; height: 400px;"></div>
+
+        <!-- LOCATIONS -->
+        <div class="locations-container">
+            <p>Locations: <span class="locs"></span></p>
+        </div>
+
+
+
+        <!-- BUTTONS -->
+        <div class="buttons grid-main-item">
+            <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position <i
+                    class="fas fa-location-arrow"></i></button>
+            <button onclick="onGetLocs()" class="btn-get-locs">Get Locations <i class="fas fa-layer-group"></i></button>
+            <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo <i class="fas fa-route"></i></button>
+            <button class="copy-url-btn" onclick="onCopyUrl()">Copy Link <i class="far fa-copy"></i></button>
+            <button onclick="testData()"> test me!</button>
+        </div>
+
+
+        <!-- Modal (display -> none) -->
+        <div class="modal-add-location">
+
+            <div class="inputs">
+                <form action="">
+                    <label class="name-label" for="location-name">Enter the location name:</label>
+                    <input class="location-name" type="text" name="" id="location-name" autocomplete="off" required>
+                    <button type="submit" onclick="onAddLocation(event)" class="btn-add">Add <span><i
+                                class="fas fa-plus"></i></span></button>
+
+                </form>
+            </div>
+
+        </div>
     </div>
 
-
-
+    <!-- USER POS DATA -->
     <p>You are at: <span class="user-pos"></span></p>
-    <p>Locations: <span class="locs"></span></p>
 
     <script src="https://kit.fontawesome.com/953834383e.js" crossorigin="anonymous"></script>
     <script src="lib/axios.js"></script>

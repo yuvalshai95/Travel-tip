@@ -1,3 +1,104 @@
+* {
+    box-sizing: border-box;
+}
+
+
+/* IMPORTS */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&family=Poppins:ital,wght@1,200&display=swap');
+
+
+/* BASICS */
+
+
+
+
+body {
+    text-align: center;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+    margin: 0;
+    padding: 0;
+    background-color: #97BFB4;
+}
+
+button {
+    cursor: pointer;
+}
+
+input {
+    padding: 7px;
+    border-radius: 7px;
+}
+
+
+
+/* LAYOUT */
+
+.main-page {
+    grid-template-areas: 'header header'
+        'map info'
+        'map locations'
+        'buttons .'
+        'footer footer';
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr, repeat(2, 3fr), 1fr;
+    gap: 20px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.main-header {
+    grid-area: header;
+    background-color: #323232;
+    color: aliceblue;
+}
+
+/* MAP */
+#map {
+    width: 80%;
+    grid-area: map;
+    min-width: 400px;
+    margin-left: 22px;
+    border-radius: 18px;
+}
+
+/* INFO */
+.info-container {
+    grid-area: info;
+}
+
+.info-container button {
+    padding: 9px;
+    border-radius: 12px;
+    margin-left: 12px;
+}
+
+/* LOCATIONS */
+
+.locations-container {
+    grid-area: locations;
+}
+
+/* BUTTONS */
+
+.buttons {
+    grid-area: buttons;
+}
+
+.buttons button {
+    padding: 11px;
+    border-radius: 15px;
+    border: none;
+    margin-left: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.buttons button:hover {
+    background-color: #F0D290;
+
+}
+
 .modal-add-location {
     display: none;
 }
@@ -12,4 +113,15 @@
     opacity: 0.9;
     width: 350px;
     text-align: center;
+}
+
+
+
+
+
+/* Helpers */
+
+.grid {
+    display: grid;
+
 }
